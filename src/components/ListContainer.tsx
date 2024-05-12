@@ -31,7 +31,7 @@ const ListContainer: React.FC = () => {
         }> = await axios.get<{
           region: Region[], 
           product: Product[]
-        }>('http://localhost:8080/list');
+        }>('http://localhost:8090/list');
         // API 응답 데이터를 상태 변수에 저장
         setProducts(response.data.product);
         setRegions(response.data.region);
@@ -60,7 +60,7 @@ const ListContainer: React.FC = () => {
         region: Region[],
         product: Product[]
       }>(
-        `http://localhost:8080/list?regionCd=${encodedRegionCd}`
+        `http://localhost:8090/list?regionCd=${encodedRegionCd}`
       )
       setProducts(response.data.product);
       setSelectedRegions(updatedSelectedRegions);
@@ -85,7 +85,6 @@ const ListContainer: React.FC = () => {
           </div>
         ))}
       </div>
-
       <br/>
       <ul>
         {/* 데이터 배열을 매핑하여 각 요소를 표시 */}
