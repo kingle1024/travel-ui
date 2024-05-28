@@ -39,7 +39,7 @@ const ListContainer: React.FC = () => {
           region2: Region_mst[], 
           region4: Region_mst[], 
           product: Product_mst[]
-        }>('http://localhost:8090/list');
+        }>('http://34.22.67.247:8090/list');
         // API 응답 데이터를 상태 변수에 저장
         setProducts(response.data.product);
         setRegions2(response.data.region2);
@@ -63,7 +63,7 @@ const ListContainer: React.FC = () => {
       }> = await axios.get<{
         region4: Region_mst[], 
         product: Product_mst[]
-      }>('http://localhost:8090/list', { params });
+      }>('http://34.22.67.247:8090/list', { params });
       setProducts(response.data.product);
       setRegions4(response.data.region4);
     } catch (error) {
