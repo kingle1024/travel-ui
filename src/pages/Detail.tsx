@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import axios, { AxiosResponse } from 'axios';
+import KakaoMap from '../components/KakaoMap';
 
 interface ProductDetail {
   id: number;
@@ -35,18 +36,20 @@ const Detail: React.FC = () => {
           <IonTitle>Detail Page</IonTitle>
         </IonToolbar>        
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen>      
         <div className="detail-container">
           {product ? (
             <>
               <h2>{product.title}</h2>
-              <a href={product.url} target="_blank" rel="noopener noreferrer">방문하기</a>
+              <KakaoMap />
+              <a href={product.url} target="_blank" rel="noopener noreferrer">방문하기</a>              
               {/* 다른 필요한 정보도 추가하세요 */}
             </>
           ) : (
             <p>Loading...</p>
           )}
         </div>
+        
       </IonContent>
     </IonPage>
   )
