@@ -7,7 +7,17 @@ declare global {
   }
 }
 
-const KakaoMap: React.FC = () => {
+interface RegionDetail {
+  lat: number;
+  lng: number;
+  title: string;
+}
+
+interface KakaoMapProps {
+  regions: RegionDetail[];
+}
+
+const KakaoMap: React.FC<KakaoMapProps> = ({regions}) => {
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -19,35 +29,31 @@ const KakaoMap: React.FC = () => {
       window.kakao.maps.load(() => {
         const container = document.getElementById('map');
         const options = {
-          center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 기본 좌표 (서울)
-          level: 3
+          center: new window.kakao.maps.LatLng(regions[0].lat, regions[0].lng), // 기본 좌표 (서울)
+          level: 7
         };
 
         const map = new window.kakao.maps.Map(container, options);
         const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소입니다    
-        // imageSize = new window.kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
         const imageOption = {offset: new window.kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
         const markerImage = new window.kakao.maps.MarkerImage(imageSrc, new window.kakao.maps.Size(64, 69), imageOption);
+        const linePath: any[] = []; // PolyLine에 사용할 좌표 배열
+
         // 마커 추가
         // 마커를 표시할 위치와 title 객체 배열입니다 
-        const positions = [
-          { lat: 37.5665, lng: 126.9780, title: '서울시청' },
-          { lat: 37.5655, lng: 126.9760, title: '덕수궁' },
-          { lat: 37.5645, lng: 126.9740, title: '경복궁' },
-        ];
-        positions.forEach(position => {
-
-          const markerPosition = new window.kakao.maps.LatLng(position.lat, position.lng);
+        
+        regions.forEach(region => {
+          const markerPosition = new window.kakao.maps.LatLng(region.lat, region.lng);
           const marker = new window.kakao.maps.Marker({
             position: markerPosition,
             image: markerImage
           });
           marker.setMap(map);
+          linePath.push(markerPosition); // PolyLine 좌표 배열에 추가
 
           const content = `<div class="customoverlay">
             <a href="https://map.kakao.com/link/map/11394059" target="_blank">
-              <span class="title">${position.title}</span>
+              <span class="title">${region.title}</span>
             </a>
           </div>`;
           const overlay = new window.kakao.maps.CustomOverlay({
@@ -56,10 +62,25 @@ const KakaoMap: React.FC = () => {
             content: content,    
             yAnchor: 1,
           }); 
+
+          // PolyLine을 생성하고 지도에 추가
+          const polyline = new window.kakao.maps.Polyline({
+            path: linePath, // 선을 구성하는 좌표 배열
+            strokeWeight: 5, // 선의 두께
+            strokeColor: '#FF0000', // 선의 색깔
+            strokeOpacity: 0.7, // 선의 불투명도
+            strokeStyle: 'solid' // 선의 스타일
+          });
+          polyline.setMap(map);
         });
+
       });
     };
-  }, []);
+
+    return () => {
+      document.head.removeChild(script);
+    }
+  }, [regions]);
 
   return (
     <div style={{ width: '100%', height: '500px' }}>

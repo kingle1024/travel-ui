@@ -8,18 +8,25 @@ interface ProductDetail {
   id: number;
   title: string;
   url: string;
-  // 필요한 다른 필드들도 추가하세요.
+}
+
+interface RegionDetail {
+  lat: number;
+  lng: number;
+  title: string;
 }
 
 const Detail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<ProductDetail | null>(null);
+  const [regions, setRegions] = useState<RegionDetail[]>([]);
   
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
-        const response = await axios.get<ProductDetail>(`http://localhost:8090/detail/${id}`);
-        setProduct(response.data);
+        const response = await axios.get<{ product: ProductDetail; regions: RegionDetail[] }>(`http://localhost:8090/detail/${id}`);
+        setProduct(response.data.product);
+        setRegions(response.data.regions)
       } catch (error) {
         console.error('Error fetching product detail:', error);
       }
@@ -41,9 +48,8 @@ const Detail: React.FC = () => {
           {product ? (
             <>
               <h2>{product.title}</h2>
-              <KakaoMap />
+              <KakaoMap regions={regions} />
               <a href={product.url} target="_blank" rel="noopener noreferrer">방문하기</a>              
-              {/* 다른 필요한 정보도 추가하세요 */}
             </>
           ) : (
             <p>Loading...</p>
