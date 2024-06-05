@@ -1,20 +1,11 @@
 import React, { useEffect } from 'react';
 import './KakaoMap.css';
+import { KakaoMapProps } from '../common/Types';
 
 declare global {
   interface Window {
     kakao: any;
   }
-}
-
-interface RegionDetail {
-  lat: number;
-  lng: number;
-  title: string;
-}
-
-interface KakaoMapProps {
-  regions: RegionDetail[];
 }
 
 const KakaoMap: React.FC<KakaoMapProps> = ({regions}) => {
@@ -30,7 +21,7 @@ const KakaoMap: React.FC<KakaoMapProps> = ({regions}) => {
         const container = document.getElementById('map');
         const options = {
           center: new window.kakao.maps.LatLng(regions[0].lat, regions[0].lng), // 기본 좌표 (서울)
-          level: 7
+          level: 6
         };
 
         const map = new window.kakao.maps.Map(container, options);
