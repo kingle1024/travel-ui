@@ -5,6 +5,7 @@ import axios from 'axios';
 import KakaoMap from '../components/KakaoMap';
 import CommentList from "../components/CommentList";
 import { CommentDetail, ProductDetail, RegionDetail } from "../common/Types";
+import API_URL from "../config";
 
 const Detail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +20,7 @@ const Detail: React.FC = () => {
           product: ProductDetail; 
           regions: RegionDetail[]; 
           comments: CommentDetail[]; 
-        }>(`http://localhost:8090/detail/${id}`);
+        }>(`${API_URL}/detail/${id}`);
 
         setProduct(response.data.product);
         setRegions(response.data.regions);

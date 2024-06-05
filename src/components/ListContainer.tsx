@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import API_URL from "../config";
 
 // 백엔드 API로부터 받아온 데이터의 형식을 정의합니다.
 interface Product_mst {
@@ -39,7 +40,7 @@ const ListContainer: React.FC = () => {
           region2: Region_mst[], 
           region4: Region_mst[], 
           product: Product_mst[]
-        }>('http://34.22.67.247:8090/list');
+        }>(`${API_URL}/list`);
         // API 응답 데이터를 상태 변수에 저장
         setProducts(response.data.product);
         setRegions2(response.data.region2);
