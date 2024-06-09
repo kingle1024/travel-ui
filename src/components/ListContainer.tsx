@@ -63,8 +63,8 @@ const ListContainer: React.FC = () => {
         product: Product_mst[]
       }> = await axios.get<{
         region4: Region_mst[], 
-        product: Product_mst[]
-      }>('http://34.22.67.247:8090/list', { params });
+        product: Product_mst[]  
+      }>(`${API_URL}/list`, { params });
       setProducts(response.data.product);
       setRegions4(response.data.region4);
     } catch (error) {
