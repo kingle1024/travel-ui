@@ -16,6 +16,10 @@ export interface CommentDetail {
   content: string;
   insertDts: string;
 }
+export interface CommentFormProps {
+  productCd: string;
+  addComment: (comment: CommentDetail) => void;
+}
 export interface CommentProps {
   comments: CommentDetail[];
 }

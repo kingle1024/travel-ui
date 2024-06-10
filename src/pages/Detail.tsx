@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from "@ionic/react";
 import axios from 'axios';
 import KakaoMap from '../components/KakaoMap';
 import CommentList from "../components/CommentList";
 import { CommentDetail, ProductDetail, RegionDetail } from "../common/Types";
 import API_URL from "../config";
+import CommentForm from "../components/CommentForm";
 
 const Detail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,6 +34,9 @@ const Detail: React.FC = () => {
     fetchProductDetail();
   }, [id]);
 
+  const addComment = (newComment: CommentDetail) => {
+    setComments((prevCOmments) => [ newComment, ...prevCOmments ]);
+  }
   
   return (
     <IonPage>
@@ -45,10 +49,17 @@ const Detail: React.FC = () => {
         <div className="detail-container">
           {product ? (
             <>
-              <h2>{product.title}</h2>
+              <div className="d-flex align-items-center">
+                <h2>{product.title}</h2> 
+                {/* <a href={product.url} target="_blank" rel="noopener noreferrer">방문하기</a> */}
+                <IonButton href={product.url} target="_blank" rel="noopener noreferrer">
+                  방문하기
+                </IonButton>
+              </div>
+
               <KakaoMap regions={regions} />
-              <CommentList comments={comments} />
-              <a href={product.url} target="_blank" rel="noopener noreferrer">방문하기</a>              
+              <CommentForm productCd={id} addComment={addComment} />
+              <CommentList comments={comments} />              
             </>
           ) : (
             <p>Loading...</p>
