@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from "@ionic/react";
 import axios from 'axios';
 import KakaoMap from '../components/KakaoMap';
@@ -7,9 +7,11 @@ import CommentList from "../components/CommentList";
 import { CommentDetail, ProductDetail, RegionDetail } from "../common/Types";
 import API_URL from "../config";
 import CommentForm from "../components/CommentForm";
+import './Detail.css';
 
 const Detail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const history = useHistory();
   const [product, setProduct] = useState<ProductDetail | null>(null);
   const [regions, setRegions] = useState<RegionDetail[]>([]);
   const [comments, setComments] = useState<CommentDetail[]>([]);
@@ -35,31 +37,48 @@ const Detail: React.FC = () => {
   }, [id]);
 
   const addComment = (newComment: CommentDetail) => {
-    setComments((prevCOmments) => [ newComment, ...prevCOmments ]);
+    setComments((prevComments) => [newComment, ...prevComments]);
   }
   
+  const handleTitleClick = () => {
+    history.push('/');
+  }
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Detail Page</IonTitle>
+          <IonTitle onClick={handleTitleClick} style={{ cursor: 'pointer' }}>Home</IonTitle>
         </IonToolbar>        
       </IonHeader>
       <IonContent fullscreen>      
         <div className="detail-container">
           {product ? (
             <>
-              <div className="d-flex align-items-center">
+              <div className="d-flex">
                 <h2>{product.title}</h2> 
-                {/* <a href={product.url} target="_blank" rel="noopener noreferrer">방문하기</a> */}
-                <IonButton href={product.url} target="_blank" rel="noopener noreferrer">
+                <IonButton 
+                  className="small-button"
+                  href={product.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"                  
+                >
                   방문하기
-                </IonButton>
+                </IonButton>                
               </div>
 
-              <KakaoMap regions={regions} />
-              <CommentForm productCd={id} addComment={addComment} />
-              <CommentList comments={comments} />              
+              <div className="map-container">
+                <KakaoMap regions={regions} />
+              </div>
+              
+              <div className="comment-section">
+                <CommentForm productCd={id} addComment={addComment} />
+                
+              </div>
+
+              <div className="comment-list">
+                <CommentList comments={comments} />
+              </div>
             </>
           ) : (
             <p>Loading...</p>

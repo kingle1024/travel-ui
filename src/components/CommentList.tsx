@@ -5,7 +5,7 @@ import { formatDate } from '../common/Utility';
 const CommentList: React.FC<CommentProps> = ({comments}) => {    
 
     return (
-        <div>
+        <>
             <h2>여행톡</h2>
             <ul>
                 {comments.map(comment => (
@@ -15,7 +15,7 @@ const CommentList: React.FC<CommentProps> = ({comments}) => {
                     </li>
                 ))}
             </ul>
-        </div>
+        </>
     );
 };
 
