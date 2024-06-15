@@ -95,6 +95,7 @@ const ListContainer: React.FC = () => {
     <div className='container'>
       <h2>코스 목록</h2>
       <div className='buttons'>
+        <div>지역</div>
         {regions2.map((item: Region_mst) => (
           <div key={item.level2} style={{ marginRight: '10px', marginBottom: '10px', display: 'inline-block' }}>
             <button
@@ -108,6 +109,7 @@ const ListContainer: React.FC = () => {
         ))}
       </div>
       <div className='buttons'>
+        <div>키워드</div>
         {regions4.map((item: Region_mst) => (
           <div key={item.level4} style={{ marginRight: '10px', marginBottom: '10px', display: 'inline-block' }}>
             <button

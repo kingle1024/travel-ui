@@ -26,14 +26,17 @@ const KakaoMap: React.FC<KakaoMapProps> = ({regions}) => {
 
         const map = new window.kakao.maps.Map(container, options);
         const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소입니다    
-        const imageOption = {offset: new window.kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-        const markerImage = new window.kakao.maps.MarkerImage(imageSrc, new window.kakao.maps.Size(64, 69), imageOption);
+        // const imageSrc = "https://korean.visitkorea.or.kr/resources/images/sub/icon_map_num1.png";
+
+        const imageOption = {offset: new window.kakao.maps.Point(13, 39)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+        const markerImage = new window.kakao.maps.MarkerImage(imageSrc, new window.kakao.maps.Size(34, 39), imageOption);
         const linePath: any[] = []; // PolyLine에 사용할 좌표 배열
 
         // 마커 추가
         // 마커를 표시할 위치와 title 객체 배열입니다 
         
         regions.forEach(region => {
+
           const markerPosition = new window.kakao.maps.LatLng(region.lat, region.lng);
           const marker = new window.kakao.maps.Marker({
             position: markerPosition,
@@ -47,11 +50,11 @@ const KakaoMap: React.FC<KakaoMapProps> = ({regions}) => {
               <span class="title">${region.title}</span>
             </a>
           </div>`;
-          const overlay = new window.kakao.maps.CustomOverlay({
+          new window.kakao.maps.CustomOverlay({
             map: map,
             position: markerPosition,
             content: content,    
-            yAnchor: 1,
+            yAnchor: 0.2,
           }); 
 
           // PolyLine을 생성하고 지도에 추가
