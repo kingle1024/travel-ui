@@ -3,12 +3,14 @@ import axios, { AxiosResponse } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import API_URL from "../config";
+import './ListContainer.css';
 
 // 백엔드 API로부터 받아온 데이터의 형식을 정의합니다.
 interface Product_mst {
   id: number;
   title: string;
   url: string;
+  regionTitle: any;
 }
 
 interface Region_mst {
@@ -127,8 +129,14 @@ const ListContainer: React.FC = () => {
         {/* 데이터 배열을 매핑하여 각 요소를 표시 */}
         {products.map((item: Product_mst) => (
           <li key={item.id}>
-            {/* <a href={item.url} target='_blank' rel='noreferrer'>{item.title}</a> */}
             <Link to={`/detail/${item.id}`}>{item.title}</Link>
+            <div>
+              {item.regionTitle.split(',').map((region: string, index: number) => (
+                <span key={index} className="badge badge-secondary" style={{ marginRight: '5px' }}>
+                  {region}
+                </span>
+              ))}
+            </div>
           </li>
         ))}
       </ul>
