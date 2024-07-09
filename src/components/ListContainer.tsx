@@ -27,7 +27,7 @@ const ListContainer: React.FC = () => {
   const [regions2, setRegions2] = useState<Region_mst[]>([]);
   const [regions4, setRegions4] = useState<Region_mst[]>([]);
   const [selectedLevel2, setSelectedLevel2] = useState<string[]>([]);
-  const [selectedLevel4, setSelectedLevel4] = useState<string[]>([]);
+  const [selectedLevel4, setSelectedLevel4] = useState<string[]>([]);  
 
   useEffect(() => {
     // 백엔드 API에서 데이터를 가져오는 함수
@@ -95,7 +95,7 @@ const ListContainer: React.FC = () => {
 
   return (
     <div className='container'>
-      <h2>코스 목록</h2>
+      <h2>당일 데이트 코스 목록</h2>
       <div className='buttons'>
         <div>지역</div>
         {regions2.map((item: Region_mst) => (
