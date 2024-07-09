@@ -8,6 +8,7 @@ import { CommentDetail, ProductDetail, RegionDetail } from "../common/Types";
 import API_URL from "../config";
 import CommentForm from "../components/CommentForm";
 import './Detail.css';
+import { Helmet } from "react-helmet";
 
 const Detail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -46,6 +47,12 @@ const Detail: React.FC = () => {
 
   return (
     <IonPage>
+      <Helmet>
+        <title>데이트 코스 상세</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="데이트 코스 상세 페이지" />
+      </Helmet>
       <IonHeader>
         <IonToolbar>
           <IonTitle onClick={handleTitleClick} style={{ cursor: 'pointer' }}>Home</IonTitle>
