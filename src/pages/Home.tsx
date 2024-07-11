@@ -19,6 +19,7 @@ const Home: React.FC = () => {
         <meta name="keywords" content="당일치기데이트, 서울당일치기데이트, 데이트코스" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="서울 당일치기 데이트하기 좋은 코스들을 볼 수 있어요. 연인과 행복한 추억을 만들어보세요." />
+        <meta name="google-adsense-account" content="ca-pub-9366813459634197" />
       </Helmet>
       <IonHeader>
         <IonToolbar>

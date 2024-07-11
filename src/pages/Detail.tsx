@@ -52,6 +52,7 @@ const Detail: React.FC = () => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="데이트 코스 상세 페이지" />
+        <meta name="google-adsense-account" content="ca-pub-9366813459634197" />      
       </Helmet>
       <IonHeader>
         <IonToolbar>
