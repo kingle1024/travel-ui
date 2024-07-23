@@ -18,8 +18,15 @@ const Home: React.FC = () => {
     script.crossOrigin = "anonymous";
     document.body.appendChild(script);
 
+    const meta = document.createElement('meta');
+    meta.name = "google-adsense-account";
+    meta.content = "ca-pub-9366813459634197";
+    document.head.appendChild(meta);
+
+
     return () => {
       document.body.removeChild(script); // 컴포넌트가 언마운트될 때 스크립트 제거
+      document.head.removeChild(meta); // 메타 태그 제거
     };
   }, []);
 
@@ -27,7 +34,6 @@ const Home: React.FC = () => {
     <IonPage>
       <Helmet>
         <title>당일 데이트 코스 목록</title>        
-        <meta name="google-adsense-account" content="ca-pub-9366813459634197"/>
         <meta charSet="utf-8" />
         <meta name="keywords" content="당일치기데이트, 서울당일치기데이트, 데이트코스" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
