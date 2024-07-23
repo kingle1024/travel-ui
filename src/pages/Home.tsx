@@ -12,11 +12,7 @@ const Home: React.FC = () => {
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9366813459634197";
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    document.body.appendChild(script);
+    document.writeln('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9366813459634197" crossorigin="anonymous"></script>');
 
     const meta = document.createElement('meta');
     meta.name = "google-adsense-account";
@@ -25,7 +21,6 @@ const Home: React.FC = () => {
 
 
     return () => {
-      document.body.removeChild(script); // 컴포넌트가 언마운트될 때 스크립트 제거
       document.head.removeChild(meta); // 메타 태그 제거
     };
   }, []);
