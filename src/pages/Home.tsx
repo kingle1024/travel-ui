@@ -11,24 +11,11 @@ import KakaoLoginButton from '../components/KakoLoginButton';
 const Home: React.FC = () => {
   const { isLoggedIn } = useAuth();
 
-  useEffect(() => {
-    document.writeln('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9366813459634197" crossorigin="anonymous"></script>');
-
-    const meta = document.createElement('meta');
-    meta.name = "google-adsense-account";
-    meta.content = "ca-pub-9366813459634197";
-    document.head.appendChild(meta);
-
-
-    return () => {
-      document.head.removeChild(meta); // 메타 태그 제거
-    };
-  }, []);
-
   return (
     <IonPage>
       <Helmet>
         <title>당일 데이트 코스 목록</title>        
+        <meta name="google-adsense-account" content="ca-pub-9366813459634197"/>
         <meta charSet="utf-8" />
         <meta name="keywords" content="당일치기데이트, 서울당일치기데이트, 데이트코스" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

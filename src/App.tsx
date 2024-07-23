@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -28,18 +28,42 @@ import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <AuthProvider>
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route path='/home' component={Home} exact={true} />
-          <Route path='/detail/:id' component={Detail} exact={true} />
-          <Route exact path='/' render={() => <Redirect to ='/home' />} />
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </AuthProvider>
-  </IonApp>
-);
+const App: React.FC = () => {
+  useEffect(() => {
+    // 메타 태그 추가
+    const meta = document.createElement('meta');
+    meta.name = "google-adsense-account";
+    meta.content = "ca-pub-9366813459634197";
+    document.head.appendChild(meta);
+
+    // 스크립트 추가
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9366813459634197";
+    script.crossOrigin = "anonymous";
+    document.body.appendChild(script);
+
+    return () => {
+      // 언마운트 시 메타 태그 및 스크립트 제거
+      document.head.removeChild(meta);
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return (
+    <IonApp>
+      <AuthProvider>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route path='/home' component={Home} exact={true} />
+            <Route path='/detail/:id' component={Detail} exact={true} />
+            <Route exact path='/' render={() => <Redirect to='/home' />} />
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </AuthProvider>
+    </IonApp>
+  );
+};
+
 
 export default App;
