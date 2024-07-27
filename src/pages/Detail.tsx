@@ -65,7 +65,7 @@ const Detail: React.FC = () => {
           {product ? (
             <>
               <div className="d-flex">
-                <h2>{product.title}</h2> 
+                <h1>{product.title}</h1> 
                 <IonButton 
                   className="small-button"
                   href={product.url} 
@@ -76,8 +76,8 @@ const Detail: React.FC = () => {
                 </IonButton>                
               </div>
 
-              <div>
-                <h3>방문 순서</h3>
+              <div className='detail-content'> 
+                <h3>이동순서</h3>
                 {regions.map((region, index) => (
                   <div key={region.regionCd}>
                     <h3>{`${index +1}. ${region.title}`}</h3>
