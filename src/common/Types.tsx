@@ -5,9 +5,11 @@ export interface ProductDetail {
 }
 
 export interface RegionDetail {
+  regionCd: string;
   lat: number;
   lng: number;
   title: string;
+  rank: number;
 }
 
 export interface CommentDetail {

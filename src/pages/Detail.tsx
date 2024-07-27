@@ -76,6 +76,15 @@ const Detail: React.FC = () => {
                 </IonButton>                
               </div>
 
+              <div>
+                <h3>방문 순서</h3>
+                {regions.map((region, index) => (
+                  <div key={region.regionCd}>
+                    <h3>{`${index +1}. ${region.title}`}</h3>
+                  </div>
+                ))}
+              </div>
+
               <div className="map-container">
                 <KakaoMap regions={regions} />
               </div>
