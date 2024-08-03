@@ -9,7 +9,7 @@ import { useAuth } from '../common/AuthContextType';
 import KakaoLoginButton from '../components/KakoLoginButton';
 
 const Home: React.FC = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   return (
     <IonPage>
@@ -23,20 +23,24 @@ const Home: React.FC = () => {
       </Helmet>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Travel</IonTitle>
-          {            
-            isLoggedIn && (
-            <IonButtons slot="end">
-              <IonButton routerLink="/mypage">마이페이지</IonButton>
-            </IonButtons>
-          )}
+          <IonButtons slot="start">
+            <IonTitle>Travel</IonTitle>
+          </IonButtons>
+          <IonButtons slot="end">
+            {            
+              isLoggedIn && (
+              <IonButtons slot="end">
+                <IonButton routerLink="/mypage">마이페이지</IonButton>
+                <IonButton onClick={logout}>로그아웃</IonButton>
+              </IonButtons>
+            )}
 
-          {
-            // !isLoggedIn && (
-              // true
-              // <KakaoLoginButton />
-            // )
-          }
+            {
+              !isLoggedIn && (              
+                <KakaoLoginButton />
+              )
+            }
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
