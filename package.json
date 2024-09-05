@@ -61,7 +61,7 @@
     "build": "NODE_ENV=production react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
     "eject": "react-scripts eject",
-    "ionic-start": "ionic serve",
+    "ionic-start": "npm ls react-scripts || (npm install react-scripts && ionic serve)",
     "lint": "eslint --ext .ts,.tsx src"
   },
   "browserslist": [
