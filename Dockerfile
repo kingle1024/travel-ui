@@ -19,6 +19,9 @@ RUN npm run build
 # 2단계: 애플리케이션 제공
 FROM nginx:alpine
 
+# 사용자 정의 nginx 설정 파일 복사
+COPY nginx.conf /etc/nginx/nginx.conf
+
 # 첫 번째 단계에서 빌드한 아티팩트를 Nginx의 html 디렉토리로 복사
 COPY --from=build /app/build /usr/share/nginx/html
 
