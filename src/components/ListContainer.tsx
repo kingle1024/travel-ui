@@ -95,7 +95,7 @@ const ListContainer: React.FC = () => {
 
   return (
     <div className='container'>
-      <h2>당일 데이트 코스 목록</h2>
+      <h2>당일 데이트 코스 목록1</h2>
       <div className='buttons'>
         <div>지역</div>
         {regions2.map((item: Region_mst) => (
