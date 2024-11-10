@@ -26,6 +26,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Mypage from './pages/Mypage';
+import LikeList from './components/LikeList';
 
 setupIonicReact();
 
@@ -39,6 +40,7 @@ const App: React.FC = () => {
             <Route path='/home' component={Home} exact={true} />
             <Route path='/detail/:id' component={Detail} exact={true} />
             <Route path='/mypage' component={Mypage} exact={true} />
+            <Route path='/mypage/likes' component={LikeList} exact={true} />
             <Route exact path='/' render={() => <Redirect to='/home' />} />          
           </IonRouterOutlet>
         </IonReactRouter>

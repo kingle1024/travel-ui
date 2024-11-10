@@ -52,33 +52,22 @@ const Mypage: React.FC = () => {
               >
                 내 정보
               </IonItem>
-              {/* <IonItem
+              <IonItem
                 button
                 onClick={() => handleTabClick('likes')}
                 className={activeTab === 'likes' ? 'active' : ''}
               >
                 좋아요 목록
               </IonItem>
-              <IonItem
-                button
-                onClick={() => handleTabClick('posts')}
-                className={activeTab === 'posts' ? 'active' : ''}
-              >
-                내 게시물
-              </IonItem> */}
             </IonList>
           </div>
           <div className="content">
-            {activeTab === 'profile' ? (
-              <>
                 <h2>내 정보</h2>
                 {user ? (
                   <p>안녕하세요, {user.name}님!</p> // 사용자 이름 표시
                 ) : (
                   <p>사용자 정보를 불러오는 중입니다...</p>
                 )}
-              </>
-            ) : null}
             {/* 좋아요 목록과 다른 컨텐츠는 별도 페이지에서 처리 */}
           </div>
         </div>
