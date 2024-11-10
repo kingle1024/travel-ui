@@ -26,9 +26,10 @@ const KakaoLoginButton = () => {
             }
 
             const data = await res.json();
-            localStorage.setItem('jwtToken', data);
+            localStorage.setItem('jwtToken', data.token);
             const userInfo = {
                 name: data.nickname,
+                userId: data.userId,
             };
             login(data, userInfo);
         } catch (error) {

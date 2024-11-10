@@ -19,7 +19,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // 로그인 시 JWT 토큰을 로컬 스토리지에 저장하고 로그인 상태 업데이트
   const login = (token: string, userInfo: User) => {
-    localStorage.setItem('jwtToken', token);
     setIsLoggedIn(true);
     setUser(userInfo);
   }
