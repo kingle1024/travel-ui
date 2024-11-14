@@ -32,11 +32,13 @@ const LikeList: React.FC = () => {
           return;
         }
 
-        const response: AxiosResponse<{ product: Product_mst[] }> = await axios.get<{ product: Product_mst[] }>(`${API_URL}/api/mypage/likes`, {
+        const response: AxiosResponse<{ product: Product_mst[] }> = await axios.get<{ 
+          product: Product_mst[] 
+        }>(`${API_URL}/api/mypage/likes`, {
           headers: {
             'Authorization': `Bearer ${token}` // Authorization 헤더에 토큰 포함
           }
-        });        
+        });
 
         // API 응답 데이터를 상태 변수에 저장
         setLikedProducts(response.data.product);
