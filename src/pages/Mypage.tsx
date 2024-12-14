@@ -19,6 +19,8 @@ const Mypage: React.FC = () => {
     // "내 정보" 클릭 시 /mypage로 이동
     if (tab === 'profile') {
       history.push('/mypage');
+    } else if (tab === 'addCourse') {
+      history.push('/mypage/course/add'); // 수정된 부분
     } else {
       history.push(`/mypage/${tab}`);
     }
@@ -58,6 +60,13 @@ const Mypage: React.FC = () => {
                 className={activeTab === 'likes' ? 'active' : ''}
               >
                 좋아요 목록
+              </IonItem>
+              <IonItem
+                button
+                onClick={() => handleTabClick('addCourse')}
+                className={activeTab === 'addCourse' ? 'active' : ''}
+              >
+                데이트 코스 등록
               </IonItem>
             </IonList>
           </div>
