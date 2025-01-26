@@ -104,14 +104,6 @@ const EmailInquiry: React.FC = () => {
                 />
               </IonItem>
               <IonItem>
-                <IonLabel position="stacked">제목</IonLabel>
-                <IonInput 
-                  value={title} 
-                  onIonChange={e => setTitle(e.detail.value!)} 
-                  placeholder="제목을 입력하세요"
-                />
-              </IonItem>
-              <IonItem>
                 <IonLabel position="stacked">내용</IonLabel>
                 <IonTextarea 
                   value={content} 
