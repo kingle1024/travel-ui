@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonButtons, IonButton, IonAlert, IonInput, IonTextarea, IonLabel } from '@ionic/react';
+import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonButtons, IonButton, IonAlert, IonInput, IonTextarea, IonLabel, IonLoading } from '@ionic/react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import './Mypage.css';
@@ -15,6 +15,7 @@ const EmailInquiry: React.FC = () => {
   const [content, setContent] = useState(''); // 내용 상태
   const [showAlert, setShowAlert] = useState(false); // 알림 상태
   const [alertMessage, setAlertMessage] = useState(''); // 알림 메시지
+  const [loading, setLoading] = useState(false); // 로딩 상태
 
   const handleTitleClick = () => {
     history.push('/');
@@ -32,6 +33,8 @@ const EmailInquiry: React.FC = () => {
       setShowAlert(true);
       return;
     }
+
+    setLoading(true); // 로딩 시작
 
     try {
       const emailRequest = {
@@ -58,6 +61,7 @@ const EmailInquiry: React.FC = () => {
         setAlertMessage('예기치 않은 오류가 발생했습니다.');
       }
     } finally {
+      setLoading(false); // 로딩 종료
       setShowAlert(true); // 알림 표시
     }
   }
@@ -124,6 +128,11 @@ const EmailInquiry: React.FC = () => {
               header={'알림'}
               message={alertMessage}
               buttons={['확인']}
+            />
+            <IonLoading
+              isOpen={loading}
+              message={'전송 중...'}
+              spinner="crescent"
             />
           </div>
         </div>
