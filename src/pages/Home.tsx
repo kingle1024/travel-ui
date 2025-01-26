@@ -27,6 +27,11 @@ const Home: React.FC = () => {
             <IonTitle>Travel</IonTitle>
           </IonButtons>
           <IonButtons slot="end">
+            {
+              <IonButtons slot="end">
+                <IonButton routerLink="/email">이메일 문의</IonButton>
+              </IonButtons>
+            }
             {            
               isLoggedIn && (
               <IonButtons slot="end">
