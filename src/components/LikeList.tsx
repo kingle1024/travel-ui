@@ -45,7 +45,32 @@ const LikeList: React.FC = () => {
       } catch (error:any) {
         // 오류 처리
         console.error('Error fetching liked products:', error);
-        if(error.response && error.response.status) {
+        if(error.response && error.response.status === 401) {
+          try {
+            const refreshToken = localStorage.getItem('refreshToken');
+            const refreshResponse = await axios.post(`${API_URL}/auth/refresh`, {
+              refreshToken,
+            });
+
+            // 새로운 Access Token을 로컬 스토리지에 저장
+            const newToken = refreshResponse.data.accessToken;
+            localStorage.setItem('jwtToken', newToken);
+
+            // 이전 요청을 새로운 Access Token으로 재시도
+            const retryResponse: AxiosResponse<{ product: Product_mst[] }> = await axios.get<{ 
+              product: Product_mst[] 
+            }>(`${API_URL}/api/mypage/likes`, {
+              headers: {
+                'Authorization': `Bearer ${newToken}`
+              }
+            });
+            
+            setLikedProducts(retryResponse.data.product);
+          } catch (refreshError) {
+            console.log('Error refreshing token:', refreshError);
+            logout();
+          }
+        } else {
           logout();
         }
       }
