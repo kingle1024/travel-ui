@@ -38,22 +38,6 @@ const KakaoLoginButton = () => {
        
     };
 
-    // 인증이 필요한 API 요청을 위한 함수 예시
-    const getProtectedData = () => {
-        const token = localStorage.getItem('jwtToken');
-        axios.get(`${API_URL}/api/protected`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            console.log('Protected data:', response.data);
-        })
-        .catch(error => {
-            console.error('Error fetching protected data:', error);
-        });
-    };
-
     return (
         <KakaoLogin
             token="b3851f460ed49a031b6c35cb808a1514"
