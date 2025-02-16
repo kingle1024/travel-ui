@@ -12,7 +12,6 @@ import Sidebar from '../common/Sidebar';
 
 const LikeList: React.FC = () => {
   const { fetchWithToken } = UseTokenRefresh();
-  const history = useHistory();
   const [likedProducts, setLikedProducts] = useState<Product_mst[]>([]); // 좋아요 목록을 저장할 상태 변수
   const [activeTab, setActiveTab] = useState('profile'); // 기본 활성화된 탭 설정
 
@@ -27,11 +26,6 @@ const LikeList: React.FC = () => {
     fetchLikedProducts();
   }, []);
 
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-    history.push(`/mypage/${tab === 'profile' ? '' : tab}`);
-  };
-
   return (
     <IonPage>
       <Helmet>
@@ -44,7 +38,7 @@ const LikeList: React.FC = () => {
       <CommonHeader />
       <IonContent>
         <div className="mypage-container">
-          <Sidebar activeTab={activeTab} onTabClick={handleTabClick} />
+          <Sidebar activeTab={activeTab} />
           <div className='content'>
             <h2>좋아요 목록</h2>
             <ul>

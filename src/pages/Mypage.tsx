@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { IonPage, IonContent } from '@ionic/react';
 import { Helmet } from 'react-helmet';
-import { useHistory } from 'react-router-dom';
 import './Mypage.css';
 import { useAuth } from '../common/AuthContextType';
 import CommonHeader from '../common/CommonHeader';
 import Sidebar from '../common/Sidebar';
 
 const Mypage: React.FC = () => {  
-  const { user, logout } = useAuth();
-  const history = useHistory();
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('profile'); // 기본 활성화된 탭 설정
-
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-    history.push(`/mypage/${tab === 'profile' ? '' : tab}`);
-  };
 
   return (
     <IonPage>
@@ -29,7 +22,7 @@ const Mypage: React.FC = () => {
       <CommonHeader />
       <IonContent>
         <div className="mypage-container">
-          <Sidebar activeTab={activeTab} onTabClick={handleTabClick} />
+          <Sidebar activeTab={activeTab} />
           <div className="content">
             <h2>내 정보</h2>
             {user ? (
