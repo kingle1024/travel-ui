@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonButtons, IonButton, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import React from 'react';
+import { IonContent, IonPage } from '@ionic/react';
 import ListContainer from '../components/ListContainer'
-import { Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import './Home.css';
-import { useAuth } from '../common/AuthContextType';
-import KakaoLoginButton from '../components/KakoLoginButton';
 import CommonHeader from '../common/CommonHeader';
 
 const Home: React.FC = () => {
-  const { isLoggedIn, logout } = useAuth();
 
   return (
     <IonPage>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonButtons, IonButton } from '@ionic/react';
+import { IonPage, IonContent } from '@ionic/react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import './Mypage.css';
@@ -11,10 +11,6 @@ const Mypage: React.FC = () => {
   const { user, logout } = useAuth();
   const history = useHistory();
   const [activeTab, setActiveTab] = useState('profile'); // 기본 활성화된 탭 설정
-
-  const handleTitleClick = () => {
-    history.push('/');
-  }
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);

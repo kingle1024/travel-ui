@@ -5,7 +5,6 @@ import axios from 'axios';
 import API_URL from "../config";
 import { Helmet } from "react-helmet";
 import { useAuth } from "../common/AuthContextType";
-import KakaoComponent from "./KakaoComponent";
 import AddressSearch from "./AddressSearch";
 
 const AddCourseContainer: React.FC = () => {

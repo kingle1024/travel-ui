@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
-import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonButtons, IonButton, IonAlert, IonInput, IonTextarea, IonLabel, IonLoading } from '@ionic/react';
+import { IonPage, IonContent, IonList, IonItem, IonButton, IonAlert, IonInput, IonTextarea, IonLabel, IonLoading } from '@ionic/react';
 import { Helmet } from 'react-helmet';
-import { useHistory } from 'react-router-dom';
 import './Mypage.css';
-import { useAuth } from '../common/AuthContextType';
 import axios from 'axios';
 import API_URL from '../config';
 import CommonHeader from '../common/CommonHeader';
 
 const EmailInquiry: React.FC = () => {  
-  const { isLoggedIn, logout } = useAuth();
-  const history = useHistory();
   const [recipientEmail, setRecipientEmail] = useState(''); // 수신자 이메일 상태
   const [title, setTitle] = useState(''); // 제목 상태
   const [content, setContent] = useState(''); // 내용 상태
   const [showAlert, setShowAlert] = useState(false); // 알림 상태
   const [alertMessage, setAlertMessage] = useState(''); // 알림 메시지
   const [loading, setLoading] = useState(false); // 로딩 상태
-
-  const handleTitleClick = () => {
-    history.push('/');
-  }
 
   const isValidEmail = (email: string) => {
     // 이메일 유효성 검사 정규표현식

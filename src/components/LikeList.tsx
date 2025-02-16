@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios, { AxiosResponse } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useHistory } from 'react-router-dom';
 import API_URL from "../config";
 import './ListContainer.css';
-import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonButtons, IonButton } from '@ionic/react';
+import { IonPage, IonContent } from '@ionic/react';
 import { Helmet } from 'react-helmet';
-import { useAuth } from '../common/AuthContextType';
 import UseTokenRefresh from '../common/UseTokenRefresh';
 import { Product_mst } from '../response/LikesResponse';
 import CommonHeader from '../common/CommonHeader';
@@ -14,7 +12,6 @@ import Sidebar from '../common/Sidebar';
 
 const LikeList: React.FC = () => {
   const { fetchWithToken } = UseTokenRefresh();
-  const { user, logout } = useAuth();
   const history = useHistory();
   const [likedProducts, setLikedProducts] = useState<Product_mst[]>([]); // 좋아요 목록을 저장할 상태 변수
   const [activeTab, setActiveTab] = useState('profile'); // 기본 활성화된 탭 설정
@@ -29,10 +26,6 @@ const LikeList: React.FC = () => {
 
     fetchLikedProducts();
   }, []);
-
-  const handleTitleClick = () => {
-    history.push('/');
-  }
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
