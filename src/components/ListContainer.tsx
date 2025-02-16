@@ -10,7 +10,7 @@ interface Product_mst {
   id: number;
   title: string;
   url: string;
-  regionTitle: any;
+  regionTitle: string;
 }
 
 interface Region_mst {

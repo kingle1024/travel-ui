@@ -7,76 +7,24 @@ import './ListContainer.css';
 import { IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonButtons, IonButton } from '@ionic/react';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../common/AuthContextType';
-
-// 백엔드 API로부터 받아온 데이터의 형식을 정의합니다.
-interface Product_mst {
-  id: number;
-  title: string;
-  url: string;
-  regionTitle: string;  // 변경
-}
+import UseTokenRefresh from '../common/UseTokenRefresh';
+import { Product_mst } from '../response/LikesResponse';
 
 const LikeList: React.FC = () => {
+  const { fetchWithToken } = UseTokenRefresh();
   const { user, logout } = useAuth();
   const history = useHistory();
   const [likedProducts, setLikedProducts] = useState<Product_mst[]>([]); // 좋아요 목록을 저장할 상태 변수
   const [activeTab, setActiveTab] = useState('profile'); // 기본 활성화된 탭 설정
 
   useEffect(() => {
-    // 사용자의 좋아요 목록을 가져오는 함수
     const fetchLikedProducts = async () => {
-      try {
-        const token = localStorage.getItem('jwtToken'); // 저장된 JWT 토큰을 가져옵니다.        
-        if(!token) {
-          console.log('token is null');
-          return;
-        }
-
-        const response: AxiosResponse<{ product: Product_mst[] }> = await axios.get<{ 
-          product: Product_mst[] 
-        }>(`${API_URL}/api/mypage/likes`, {
-          headers: {
-            'Authorization': `Bearer ${token}` // Authorization 헤더에 토큰 포함
-          }
-        });
-
-        // API 응답 데이터를 상태 변수에 저장
-        setLikedProducts(response.data.product);
-      } catch (error:any) {
-        // 오류 처리
-        console.error('Error fetching liked products:', error);
-        if(error.response && error.response.status === 401) {
-          try {
-            const refreshToken = localStorage.getItem('refreshToken');
-            const refreshResponse = await axios.post(`${API_URL}/auth/refresh`, {
-              refreshToken,
-            });
-
-            // 새로운 Access Token을 로컬 스토리지에 저장
-            const newToken = refreshResponse.data.accessToken;
-            localStorage.setItem('jwtToken', newToken);
-
-            // 이전 요청을 새로운 Access Token으로 재시도
-            const retryResponse: AxiosResponse<{ product: Product_mst[] }> = await axios.get<{ 
-              product: Product_mst[] 
-            }>(`${API_URL}/api/mypage/likes`, {
-              headers: {
-                'Authorization': `Bearer ${newToken}`
-              }
-            });
-            
-            setLikedProducts(retryResponse.data.product);
-          } catch (refreshError) {
-            console.log('Error refreshing token:', refreshError);
-            logout();
-          }
-        } else {
-          logout();
-        }
+      const data = await fetchWithToken(`${API_URL}/api/mypage/likes`);
+      if (data) {
+        setLikedProducts(data.product);
       }
     };
 
-    // 컴포넌트가 마운트될 때 API 호출
     fetchLikedProducts();
   }, []);
 
