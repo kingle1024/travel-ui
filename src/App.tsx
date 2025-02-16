@@ -5,7 +5,6 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
 import { AuthProvider } from './common/AuthContextType';
-import PrivateRoute from './common/PrivateRoute';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
