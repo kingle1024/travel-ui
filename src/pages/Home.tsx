@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet';
 import './Home.css';
 import { useAuth } from '../common/AuthContextType';
 import KakaoLoginButton from '../components/KakoLoginButton';
+import CommonHeader from '../common/CommonHeader';
 
 const Home: React.FC = () => {
   const { isLoggedIn, logout } = useAuth();
@@ -21,33 +22,7 @@ const Home: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="서울 당일치기 데이트하기 좋은 코스들을 볼 수 있어요. 연인과 행복한 추억을 만들어보세요." />
       </Helmet>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonTitle>Travel</IonTitle>
-          </IonButtons>
-          <IonButtons slot="end">
-            {
-              <IonButtons slot="end">
-                <IonButton routerLink="/email">이메일 문의</IonButton>
-              </IonButtons>
-            }
-            {            
-              isLoggedIn && (
-              <IonButtons slot="end">
-                <IonButton routerLink="/mypage">마이페이지</IonButton>
-                <IonButton onClick={logout}>로그아웃</IonButton>
-              </IonButtons>
-            )}
-
-            {
-              !isLoggedIn && (              
-                <KakaoLoginButton />
-              )
-            }
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <CommonHeader />
       <IonContent fullscreen>
         <ListContainer />
       </IonContent>

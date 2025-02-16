@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import './Mypage.css';
 import { useAuth } from '../common/AuthContextType';
+import CommonHeader from '../common/CommonHeader';
+import Sidebar from '../common/Sidebar';
 
 const Mypage: React.FC = () => {  
   const { user, logout } = useAuth();
@@ -16,14 +18,7 @@ const Mypage: React.FC = () => {
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
-    // "내 정보" 클릭 시 /mypage로 이동
-    if (tab === 'profile') {
-      history.push('/mypage');
-    } else if (tab === 'addCourse') {
-      history.push('/mypage/course/add'); // 수정된 부분
-    } else {
-      history.push(`/mypage/${tab}`);
-    }
+    history.push(`/mypage/${tab === 'profile' ? '' : tab}`);
   };
 
   return (
@@ -35,49 +30,17 @@ const Mypage: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="마이페이지" />
       </Helmet>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle onClick={handleTitleClick} style={{ cursor: 'pointer' }}>Home</IonTitle>
-          <IonButtons slot='end'>
-            <IonButton onClick={logout}>로그아웃</IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <CommonHeader />
       <IonContent>
         <div className="mypage-container">
-          <div className="sidebar">
-            <IonList>
-              <IonItem
-                button
-                onClick={() => handleTabClick('profile')}
-                className={activeTab === 'profile' ? 'active' : ''}
-              >
-                내 정보
-              </IonItem>
-              <IonItem
-                button
-                onClick={() => handleTabClick('likes')}
-                className={activeTab === 'likes' ? 'active' : ''}
-              >
-                좋아요 목록
-              </IonItem>
-              <IonItem
-                button
-                onClick={() => handleTabClick('addCourse')}
-                className={activeTab === 'addCourse' ? 'active' : ''}
-              >
-                데이트 코스 등록
-              </IonItem>
-            </IonList>
-          </div>
+          <Sidebar activeTab={activeTab} onTabClick={handleTabClick} />
           <div className="content">
-                <h2>내 정보</h2>
-                {user ? (
-                  <p>안녕하세요, {user.name}님!</p> // 사용자 이름 표시
-                ) : (
-                  <p>사용자 정보를 불러오는 중입니다...</p>
-                )}
-            {/* 좋아요 목록과 다른 컨텐츠는 별도 페이지에서 처리 */}
+            <h2>내 정보</h2>
+            {user ? (
+              <p>안녕하세요, {user.name}님!</p> // 사용자 이름 표시
+            ) : (
+              <p>사용자 정보를 불러오는 중입니다...</p>
+            )}
           </div>
         </div>
       </IonContent>

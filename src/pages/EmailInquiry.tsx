@@ -6,6 +6,7 @@ import './Mypage.css';
 import { useAuth } from '../common/AuthContextType';
 import axios from 'axios';
 import API_URL from '../config';
+import CommonHeader from '../common/CommonHeader';
 
 const EmailInquiry: React.FC = () => {  
   const { isLoggedIn, logout } = useAuth();
@@ -75,20 +76,7 @@ const EmailInquiry: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="이메일" />
       </Helmet>
-      <IonHeader>
-        <IonToolbar>          
-          <IonTitle onClick={handleTitleClick} style={{ cursor: 'pointer' }}>Home</IonTitle>
-          <IonButtons slot='end'>
-            {            
-              isLoggedIn && (
-              <IonButtons slot="end">
-                <IonButton routerLink="/mypage">마이페이지</IonButton>
-                <IonButton onClick={logout}>로그아웃</IonButton>
-              </IonButtons>
-            )}
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <CommonHeader />
       <IonContent>
       <div className="mypage-container">
           <div className="content">

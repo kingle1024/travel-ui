@@ -9,6 +9,8 @@ import { Helmet } from 'react-helmet';
 import { useAuth } from '../common/AuthContextType';
 import UseTokenRefresh from '../common/UseTokenRefresh';
 import { Product_mst } from '../response/LikesResponse';
+import CommonHeader from '../common/CommonHeader';
+import Sidebar from '../common/Sidebar';
 
 const LikeList: React.FC = () => {
   const { fetchWithToken } = UseTokenRefresh();
@@ -34,12 +36,7 @@ const LikeList: React.FC = () => {
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
-    // "내 정보" 클릭 시 /mypage로 이동
-    if (tab === 'profile') {
-      history.push('/mypage');
-    } else {
-      history.push(`/mypage/${tab}`);
-    }
+    history.push(`/mypage/${tab === 'profile' ? '' : tab}`);
   };
 
   return (
@@ -51,35 +48,10 @@ const LikeList: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="마이페이지" />
       </Helmet>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle onClick={handleTitleClick} style={{ cursor: 'pointer' }}>Home</IonTitle>
-          <IonButtons slot='end'>
-            <IonButton onClick={logout}>로그아웃</IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <CommonHeader />
       <IonContent>
         <div className="mypage-container">
-          <div className="sidebar">
-            <IonList>
-              <IonItem
-                button
-                onClick={() => handleTabClick('profile')}
-                className={activeTab === 'profile' ? 'active' : ''}
-              >
-                내 정보
-              </IonItem>
-              <IonItem
-                button
-                onClick={() => handleTabClick('likes')}
-                className={activeTab === 'likes' ? 'active' : ''}
-              >
-                좋아요 목록
-              </IonItem>
-            </IonList>
-          </div>
-
+          <Sidebar activeTab={activeTab} onTabClick={handleTabClick} />
           <div className='content'>
             <h2>좋아요 목록</h2>
             <ul>
